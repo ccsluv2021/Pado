@@ -176,15 +176,16 @@
        ========================================================= */
     #resultScreen { text-align: center; padding: 10px 0; }
     
-    /* 🔥 [수정] B안: 결과 화면 상단 이미지 와이드 배너형으로 변경 */
+    /* 🔥 [수정됨] 카드 상단/좌우를 꽉 채우고 하단은 자연스럽게 페이드아웃되는 배너 스타일 */
     .result-top-img {
-      width: 85%;                 /* 가로를 시원하게 넓힘 */
-      max-height: 240px;
-      object-fit: cover;          /* 이미지 비율을 유지하면서 예쁘게 채움 */
-      border-radius: 24px;        /* 전체 둥근 디자인과 통일감 */
-      margin: 0 auto 24px;
+      width: calc(100% + 56px);      /* 카드 좌우 여백(28px * 2)을 꽉 채움 */
+      margin: -40px -28px 16px -28px; /* 카드 상단 여백(-40px)까지 밀어올려 일체화 */
+      max-height: 230px;
+      object-fit: cover;
       display: block;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* 부드럽고 고급스러운 그림자 */
+      /* 하단 페이드아웃 마스크 그라데이션 */
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
     }
 
     .result-score-badge {
@@ -281,6 +282,7 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
+        <!-- 상단/좌우를 꽉 채우고 아래쪽으로 페이드아웃되는 메인02 이미지 -->
         <img class="result-top-img" src="메인02.jpg" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
@@ -299,7 +301,6 @@
           </div>
           <div class="form-group">
             <label class="form-label">전화번호</label>
-            <!-- 자동 하이픈 생성 및 최대 13자리 제한 적용 -->
             <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" maxlength="13" oninput="formatPhone(this)" required>
           </div>
           <div class="form-group">
@@ -443,7 +444,6 @@
       document.getElementById("scoreMessage").style.display = "none";
     }
 
-    // 전화번호 입력 시 자동 하이픈(-) 포맷팅 함수
     function formatPhone(target) {
       let val = target.value.replace(/[^0-9]/g, '');
       if (val.length > 11) {
@@ -470,7 +470,6 @@
         return; 
       }
 
-      // 000-0000-0000 (11자리) 형식 검증 정규식
       const phoneRegex = /^01[0-9]-\d{4}-\d{4}$/;
       if (!phoneRegex.test(phone)) {
         alert("전화번호를 올바른 형식(010-0000-0000)으로 정확히 입력해주세요.");
