@@ -176,16 +176,20 @@
        ========================================================= */
     #resultScreen { text-align: center; padding: 10px 0; }
     
-    /* 일러스트 전체 노출 + 하단 페이드아웃 적용 */
+    /* 🔥 [수정됨] 여백/테두리 완벽 밀착 및 상단 모서리 둥글게 처리 */
     .result-top-img {
-      width: calc(100% + 56px);      
-      margin: -40px -28px 20px -28px; 
-      height: auto;                   
-      max-height: 380px;              
-      object-fit: contain;            
+      width: calc(100% + 56px);      /* 카드의 패딩(좌우 28px)을 꽉 채움 */
+      /* 카드 상단 패딩(40px) + resultScreen 상단 패딩(10px) = 50px 위로 당김 */
+      margin: -50px -28px 24px -28px; 
+      border-top-left-radius: 32px;  /* 카드의 모서리 곡률과 동일하게 맞춤 */
+      border-top-right-radius: 32px; /* 카드의 모서리 곡률과 동일하게 맞춤 */
+      height: auto;
+      max-height: none;              /* 원본 가로형 이미지 비율 온전히 유지 */
+      object-fit: cover;
       display: block;
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+      /* 하단 페이드아웃 효과 */
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
     }
 
     .result-score-badge {
@@ -282,7 +286,6 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
-        <!-- 🔥 [수정됨] 파일명이 메인02.png 로 교체되었습니다. -->
         <img class="result-top-img" src="메인02.png" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
@@ -301,7 +304,6 @@
           </div>
           <div class="form-group">
             <label class="form-label">전화번호</label>
-            <!-- 자동 하이픈 생성 및 최대 13자리 제한 적용 -->
             <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" maxlength="13" oninput="formatPhone(this)" required>
           </div>
           <div class="form-group">
