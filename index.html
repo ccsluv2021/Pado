@@ -9,7 +9,7 @@
     /* =========================================================
        1. 디자인 테마 변수 및 폰트
        ========================================================= */
-    /* 🔥 눈누 웹폰트 1: 신촌랩소디 (큰 제목, O/X 버튼용) */
+    /* 눈누 웹폰트 1: 신촌랩소디 (큰 제목, O/X 버튼용) */
     @font-face {
       font-family: 'SinchonRhapsody';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2503@1.0/SinchonRhapsody.woff2') format('woff2');
@@ -17,7 +17,7 @@
       font-style: normal;
     }
 
-    /* 🔥 눈누 웹폰트 2: 페이퍼로지 (그 외 모든 기본 텍스트, 설명, 입력칸용) */
+    /* 눈누 웹폰트 2: 페이퍼로지 (그 외 모든 기본 텍스트, 설명, 입력칸용) */
     @font-face {
       font-family: 'Paperlogy';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
@@ -51,7 +51,6 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
-    /* 🔥 페이지 기본 폰트를 '페이퍼로지'로 설정 */
     body {
       font-family: 'Paperlogy', -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
       font-weight: 500;
@@ -70,14 +69,13 @@
       position: relative; overflow: hidden; transition: all 0.3s ease;
     }
 
-    /* 🔥 큼직한 타이틀과 O/X버튼에는 다시 '신촌랩소디' 적용 */
     .start-title, 
     .question-text, 
     .btn-ox, 
     .success-title, 
     .feedback-status {
       font-family: 'SinchonRhapsody', sans-serif;
-      font-weight: normal; /* 신촌랩소디는 원래 단일 굵기입니다 */
+      font-weight: normal;
     }
 
     #quizScreen, #resultScreen { display: none; }
@@ -154,7 +152,6 @@
       100% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0); }
     }
     
-    /* 퀴즈 풀기 등 텍스트 버튼은 페이퍼로지체 유지 */
     .btn-primary {
       background: var(--apple-blue); color: #ffffff; border: none; padding: 18px 36px; font-size: 18px; font-weight: 700;
       border-radius: 980px; cursor: pointer; width: 100%; box-shadow: 0 6px 16px rgba(0, 113, 227, 0.25); transition: transform 0.15s;
@@ -241,7 +238,6 @@
 
       <!-- 1. 시작 화면 -->
       <div id="startScreen">
-        <!-- 저장소의 메인01.png 파일명으로 연결 -->
         <img class="start-main-img" src="메인01.png" alt="메인 포스터" onerror="this.style.display='none'" />
         
         <div class="campaign-tag">2026 청춘스럽 청년주간</div>
@@ -278,7 +274,6 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
-        <!-- 저장소의 메인02.jpg 파일명으로 연결 -->
         <img class="result-top-img" src="메인02.jpg" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
@@ -297,7 +292,8 @@
           </div>
           <div class="form-group">
             <label class="form-label">전화번호</label>
-            <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" required>
+            <!-- 자동 하이픈 생성 및 최대 13자리 제한 적용 -->
+            <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" maxlength="13" oninput="formatPhone(this)" required>
           </div>
           <div class="form-group">
             <label class="form-label">간단한 소감</label>
@@ -335,7 +331,6 @@
   <!-- 상품 이미지 모달 팝업 -->
   <div class="modal-overlay" id="itemModal" onclick="closeModal(event)">
     <div class="modal-content">
-      <!-- 저장소의 item01.jpg 파일명으로 연결 -->
       <img src="item01.jpg" alt="상품 이미지" class="modal-img" onerror="this.style.display='none'" />
       <button class="btn-primary" onclick="closeModal(event)" style="padding: 12px 24px;">확인</button>
     </div>
@@ -441,6 +436,21 @@
       document.getElementById("scoreMessage").style.display = "none";
     }
 
+    // 전화번호 입력 시 자동 하이픈(-) 포맷팅 함수
+    function formatPhone(target) {
+      let val = target.value.replace(/[^0-9]/g, '');
+      if (val.length > 11) {
+        val = val.substring(0, 11);
+      }
+      if (val.length > 7) {
+        target.value = val.replace(/(\d{3})(\d{4})(\d+)/, '$1-$2-$3');
+      } else if (val.length > 3) {
+        target.value = val.replace(/(\d{3})(\d+)/, '$1-$2');
+      } else {
+        target.value = val;
+      }
+    }
+
     function submitToSheet() {
       const name = document.getElementById('userName').value.trim();
       const birth = document.getElementById('userBirth').value;
@@ -448,8 +458,22 @@
       const review = document.getElementById('userReview').value.trim();
       const consent = document.getElementById('userConsent').checked;
 
-      if(!name || !birth || !phone || !review) { alert("모든 항목(소감 포함)을 입력해주세요."); return; }
-      if(!consent) { alert("개인정보 수집 및 이용에 동의하셔야 이벤트 응모가 가능합니다."); return; }
+      if(!name || !birth || !phone || !review) { 
+        alert("모든 항목(소감 포함)을 입력해주세요."); 
+        return; 
+      }
+
+      // 000-0000-0000 (11자리) 형식 검증 정규식
+      const phoneRegex = /^01[0-9]-\d{4}-\d{4}$/;
+      if (!phoneRegex.test(phone)) {
+        alert("전화번호를 올바른 형식(010-0000-0000)으로 정확히 입력해주세요.");
+        return;
+      }
+
+      if(!consent) { 
+        alert("개인정보 수집 및 이용에 동의하셔야 이벤트 응모가 가능합니다."); 
+        return; 
+      }
 
       const btn = document.getElementById('submitBtn');
       const loader = document.getElementById('submitLoader');
