@@ -206,7 +206,7 @@
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
         
-        <p class="result-quote">🏝️🌊<br>여러분의 작은 관심이 누군가에게는<br>세상으로 다시 건너오는 다리가 됩니다</p>
+        <p class="result-quote">🏝️🌊<br>여러분의 작은 관심이 누군가에게는<br>세상으로 다시 건너오는 다리가 됩니다<br>‧̍̊˙· 𓆝.° ｡  𓏲 𓋒 𓏲 𓏧 ˚𓆛˚｡ °.𓆞 ·˙‧̍̊</p>
         <p class="feedback-desc" id="scoreMessage" style="text-align: center; margin-bottom: 24px; background: none; padding: 0;">수고하셨습니다!</p>
         
         <div class="form-container" id="rewardForm">
@@ -224,7 +224,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">간단한 소감</label>
-            <textarea id="userReview" class="form-input" placeholder="퀴즈를 풀어보니 어떠셨나요?" required></textarea>
+            <textarea id="userReview" class="form-input" placeholder="퀴즈를 풀어보니 어떠셨나요?<br>새롭게 알게된 점이 있다면 간단하게 적어주세요 :)" required></textarea>
           </div>
           <div class="checkbox-group">
             <input type="checkbox" id="userConsent" required>
@@ -237,9 +237,9 @@
         </div>
 
         <div id="submitSuccess">
-          <div class="success-title">🎉 이벤트 응모가 완료되었습니다!</div>
-          <div class="success-desc">기간 내에 청춘스럽에 방문하여<br><span class="item-link" onclick="openModal()">🎁 상품</span>을 수령해주세요!</div>
-          <div class="success-sub">(※ 상품은 선착순 수령으로 소진 시, 이벤트가 종료됩니다.)</div>
+          <div class="success-title">🎉 이벤트 응모가 완료되었습니다!<br>참여해주셔서 감사합니다.</div>
+          <div class="success-desc">이벤트 기간 내에 청춘스럽에 방문하여<br><span class="item-link" onclick="openModal()">🎁 상품</span>을 수령해주세요!</div>
+          <div class="success-sub">(※ 상품은 선착순 수령입니다. 소진 시, 이벤트가 종료됩니다.)</div>
           
           <button class="btn-close" onclick="closeWindow()">창 닫기</button>
         </div>
@@ -411,7 +411,7 @@
     function closeWindow() {
       if (window.confirm("이벤트 응모가 완료되었습니다. 창을 닫으시겠습니까?")) {
         window.close();
-        alert("이용하시는 브라우저에서는 버튼으로 창을 닫을 수 없습니다. 직접 뒤로 가기나 탭 닫기를 눌러주세요.");
+        alert("닫히지 않는 경우, 직접 뒤로 가기나 탭 닫기를 눌러주세요.");
       }
     }
   </script>
