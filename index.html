@@ -176,16 +176,17 @@
        ========================================================= */
     #resultScreen { text-align: center; padding: 10px 0; }
     
-    /* 🔥 [수정됨] 카드 상단/좌우를 꽉 채우고 하단은 자연스럽게 페이드아웃되는 배너 스타일 */
+    /* 🔥 [수정됨] 일러스트 전체 노출 + 하단 페이드아웃 적용 */
     .result-top-img {
-      width: calc(100% + 56px);      /* 카드 좌우 여백(28px * 2)을 꽉 채움 */
-      margin: -40px -28px 16px -28px; /* 카드 상단 여백(-40px)까지 밀어올려 일체화 */
-      max-height: 230px;
-      object-fit: cover;
+      width: calc(100% + 56px);      
+      margin: -40px -28px 20px -28px; 
+      height: auto;                   /* 원본 비율대로 높이 자동 확장 */
+      max-height: 380px;              /* 모바일 화면에 맞춘 최대 높이 */
+      object-fit: contain;            /* 이미지가 1px도 잘리지 않도록 설정 */
       display: block;
-      /* 하단 페이드아웃 마스크 그라데이션 */
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+      /* 맨 아래 15% 영역만 자연스럽게 페이드아웃 */
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
     }
 
     .result-score-badge {
@@ -282,7 +283,6 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
-        <!-- 상단/좌우를 꽉 채우고 아래쪽으로 페이드아웃되는 메인02 이미지 -->
         <img class="result-top-img" src="메인02.jpg" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
