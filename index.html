@@ -94,15 +94,16 @@
       padding: 10px 0; 
     }
 
+    /* 🔥 [수정됨] 시작화면 이미지 스타일 변경 */
     .start-main-img {
-      width: 90%;                            
-      max-height: 220px;
+      width: 60%;                            /* 크기를 기존 90%에서 60%로 대폭 축소 */
+      max-height: 200px;
       object-fit: contain;                   
       border-radius: 20px;
       margin: 0 auto 24px;                   
       display: block;                        
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: none;                      /* 그림자 삭제 */
+      border: none;                          /* 얇은 테두리선 삭제 */
     }
 
     .start-title { 
@@ -327,7 +328,6 @@
            ========================================================= -->
       <div id="startScreen">
         
-        <!-- 지정하신 깃허브 이미지 링크 반영됨 -->
         <img 
           class="start-main-img" 
           src="https://private-user-images.githubusercontent.com/320914671/640774248-cff74393-1e47-43b0-88bb-bdf77ed775d3.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODkwMTgyOTcsIm5iZiI6MTc4OTAxNzk5NywicGF0aCI6Ii8zMjA5MTQ2NzEvNjQwNzc0MjQ4LWNmZjc0MzkzLTFlNDctNDNiMC04OGJiLWJkZjc3ZWQ3NzVkMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwOTEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDkxMFQwNTI2MzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05NWE2NmNiZTcxNDA4NzgwNDkwYzU0NjExNWZhM2I2YTgyYmFmOTE0YTE1NWRlM2U1MGFlMDljODBkYTZiZDNkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.sEGO8lPV5R2he1MqEJMSdLscY7sU0py6ChAgCHyQhL0" 
@@ -345,7 +345,6 @@
            ========================================================= -->
       <div id="quizScreen">
         
-        <!-- 👈 이전 페이지로 돌아가기 버튼 -->
         <div class="top-nav">
           <button class="btn-back" onclick="goBack()" title="이전 단계로">👈</button>
         </div>
@@ -371,7 +370,6 @@
            ========================================================= -->
       <div id="resultScreen">
         
-        <!-- 👈 결과창에서도 퀴즈로 돌아가기 버튼 지원 -->
         <div class="top-nav">
           <button class="btn-back" onclick="goBack()" title="이전 단계로">👈</button>
         </div>
@@ -395,7 +393,6 @@
             <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" required>
           </div>
 
-          <!-- 간단한 소감 입력 영역 -->
           <div class="form-group">
             <label class="form-label">간단한 소감</label>
             <textarea id="userReview" class="form-input" placeholder="퀴즈를 풀어보니 어떠셨나요?" required></textarea>
@@ -412,7 +409,6 @@
           <div class="loader" id="submitLoader"></div>
         </div>
 
-        <!-- 제출 완료 후 뜨는 안내 메시지 -->
         <div id="submitSuccess" style="display: none; margin-top: 28px; font-weight: 700; color: var(--accent-o); font-size: 18px;">
           🎉 이벤트 응모가 완료되었습니다!
         </div>
