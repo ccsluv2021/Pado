@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <!-- 모바일 기기 화면 비율 최적화 (스마트폰에서 예쁘게 보이게 함) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>고립·은둔청년<br>인식개선 퀴즈 & 이벤트</title>
+  <title>고립·은둔청년 인식개선 퀴즈 & 이벤트</title>
   
   <style>
     /* =========================================================
@@ -94,16 +94,15 @@
       padding: 10px 0; 
     }
 
-    /* 🔥 [수정됨] 시작화면 이미지 스타일 변경 */
     .start-main-img {
-      width: 60%;                            /* 크기를 기존 90%에서 60%로 대폭 축소 */
+      width: 60%;                            
       max-height: 200px;
       object-fit: contain;                   
       border-radius: 20px;
       margin: 0 auto 24px;                   
       display: block;                        
-      box-shadow: none;                      /* 그림자 삭제 */
-      border: none;                          /* 얇은 테두리선 삭제 */
+      box-shadow: none;                      
+      border: none;                          
     }
 
     .start-title { 
@@ -328,14 +327,15 @@
            ========================================================= -->
       <div id="startScreen">
         
+        <!-- 🔥 [핵심!] 복잡한 주소 대신 main.png 파일 이름만 적어주면 됩니다. -->
         <img 
           class="start-main-img" 
-          src="https://private-user-images.githubusercontent.com/320914671/640774248-cff74393-1e47-43b0-88bb-bdf77ed775d3.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODkwMTgyOTcsIm5iZiI6MTc4OTAxNzk5NywicGF0aCI6Ii8zMjA5MTQ2NzEvNjQwNzc0MjQ4LWNmZjc0MzkzLTFlNDctNDNiMC04OGJiLWJkZjc3ZWQ3NzVkMy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwOTEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDkxMFQwNTI2MzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05NWE2NmNiZTcxNDA4NzgwNDkwYzU0NjExNWZhM2I2YTgyYmFmOTE0YTE1NWRlM2U1MGFlMDljODBkYTZiZDNkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.sEGO8lPV5R2he1MqEJMSdLscY7sU0py6ChAgCHyQhL0" 
+          src="메인01.png" 
           alt="고립은둔청년인식개선 메인 포스터"
           onerror="this.style.display='none'" 
         />
 
-        <h1 class="start-title">고립·은둔청년 인식개선 OX 퀴즈</h1>
+        <h1 class="start-title">고립·은둔청년<br>인식개선 퀴즈 & 이벤트</h1>
         <p class="start-desc">문제를 읽어보고 답지를 확인해보세요!<br>퀴즈 후 이벤트에 응모하면 선물을 드립니다.</p>
         <button class="btn-primary" onclick="startQuiz()">시작하기</button>
       </div>
@@ -431,7 +431,7 @@
        5. 자바스크립트 (동작 로직)
        ========================================================= -->
   <script>
-    // [구글 시트 연동 URL]
+    // [구글 시트 연동 URL] 완벽하게 업데이트 완료!
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzI42UEt-TFw_m74itK3vw_JhIZmSwJ4Mkd0bsYkz2w1Rn78_h1YusKPOHcKPWuCQb6JA/exec';
 
     const quizData = [
