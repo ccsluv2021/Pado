@@ -176,15 +176,14 @@
        ========================================================= */
     #resultScreen { text-align: center; padding: 10px 0; }
     
-    /* 🔥 [수정됨] 일러스트 전체 노출 + 하단 페이드아웃 적용 */
+    /* 일러스트 전체 노출 + 하단 페이드아웃 적용 */
     .result-top-img {
       width: calc(100% + 56px);      
       margin: -40px -28px 20px -28px; 
-      height: auto;                   /* 원본 비율대로 높이 자동 확장 */
-      max-height: 380px;              /* 모바일 화면에 맞춘 최대 높이 */
-      object-fit: contain;            /* 이미지가 1px도 잘리지 않도록 설정 */
+      height: auto;                   
+      max-height: 380px;              
+      object-fit: contain;            
       display: block;
-      /* 맨 아래 15% 영역만 자연스럽게 페이드아웃 */
       -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
       mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
     }
@@ -283,6 +282,7 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
+        <!-- 🔥 [수정됨] 파일명이 메인02.png 로 교체되었습니다. -->
         <img class="result-top-img" src="메인02.png" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
@@ -301,6 +301,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">전화번호</label>
+            <!-- 자동 하이픈 생성 및 최대 13자리 제한 적용 -->
             <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" maxlength="13" oninput="formatPhone(this)" required>
           </div>
           <div class="form-group">
