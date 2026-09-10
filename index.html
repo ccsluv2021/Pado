@@ -2,221 +2,96 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <!-- 모바일 기기 화면 비율 최적화 (스마트폰에서 예쁘게 보이게 함) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>고립·은둔청년 인식개선 퀴즈 & 이벤트</title>
   
   <style>
     /* =========================================================
-       1. 디자인 테마 변수 (색상, 그림자 등을 한 번에 바꾸는 곳)
+       1. 디자인 테마 변수 (색상, 그림자 등)
        ========================================================= */
     :root {
-      --bg-color: #f5f5f7;                    /* 전체 페이지 배경색 (애플 연회색) */
-      --card-bg: rgba(255, 255, 255, 0.88);   /* 카드 배경색 (반투명 화이트) */
-      --text-main: #1d1d1f;                   /* 주요 제목 및 본문 진한 글자색 */
-      --text-sub: #86868b;                    /* 부제목 및 연한 안내 글자색 */
-      --accent-o: #34c759;                    /* 'O' 버튼 녹색 */
-      --accent-x: #ff3b30;                    /* 'X' 버튼 빨간색 */
-      --apple-blue: #0071e3;                  /* 애플 블루 메인 컬러 */
+      --bg-color: #f5f5f7;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --text-main: #1d1d1f;
+      --text-sub: #86868b;
+      --accent-o: #34c759;
+      --accent-x: #ff3b30;
+      --apple-blue: #0071e3;
       --shadow-3d: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
       --inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
 
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-      -webkit-font-smoothing: antialiased; 
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Pretendard", sans-serif;
       background-color: var(--bg-color);
       color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 24px;
-      perspective: 1000px;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; padding: 24px; perspective: 1000px;
     }
 
-    .container { 
-      width: 100%; 
-      max-width: 460px; 
-    }
+    .container { width: 100%; max-width: 460px; }
 
-    /* 애플 글래스모피즘(반투명 유리) 3D 카드 디자인 */
     .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(25px);            
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 32px;                   
-      padding: 40px 28px;
-      box-shadow: var(--shadow-3d);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
+      background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 32px;
+      padding: 40px 28px; box-shadow: var(--shadow-3d);
+      position: relative; overflow: hidden; transition: all 0.3s ease;
     }
 
     #quizScreen, #resultScreen { display: none; }
 
     /* =========================================================
-       2. 상단 네비게이션 (이전 버튼) 및 시작 화면 스타일
+       2. 상단 네비게이션 및 시작 화면 스타일
        ========================================================= */
     .top-nav {
-      display: flex;
-      justify-content: flex-start;
-      margin-bottom: 20px;
-      margin-top: -16px; 
+      display: flex; justify-content: flex-start; margin-bottom: 20px; margin-top: -16px; 
     }
-
     .btn-back {
-      background: rgba(0, 0, 0, 0.04);
-      border: none;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, transform 0.2s;
+      background: rgba(0, 0, 0, 0.04); border: none; border-radius: 50%;
+      width: 36px; height: 36px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s;
     }
     .btn-back:hover { background: rgba(0, 0, 0, 0.08); transform: translateX(-3px); }
     .btn-back:active { transform: scale(0.9); }
 
-    /* 시작 화면 */
-    #startScreen { 
-      text-align: center; 
-      padding: 10px 0; 
-    }
-
+    #startScreen { text-align: center; padding: 10px 0; }
+    
     .start-main-img {
-      width: 60%;                            
-      max-height: 200px;
-      object-fit: contain;                   
-      border-radius: 20px;
-      margin: 0 auto 24px;                   
-      display: block;                        
-      box-shadow: none;                      
-      border: none;                          
+      width: 60%; max-height: 200px; object-fit: contain; border-radius: 20px;
+      margin: 0 auto 24px; display: block; box-shadow: none; border: none;
     }
 
-    .start-title { 
-      font-size: 25px; 
-      font-weight: 700; 
-      letter-spacing: -0.03em; 
-      margin-bottom: 12px; 
-      word-break: keep-all;                  
-    }
-
-    .start-desc { 
-      font-size: 15px; 
-      line-height: 1.55; 
-      color: var(--text-sub); 
-      margin-bottom: 32px; 
-      word-break: keep-all; 
-    }
+    .start-title { font-size: 25px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; word-break: keep-all; }
+    .start-desc { font-size: 15px; line-height: 1.55; color: var(--text-sub); margin-bottom: 32px; word-break: keep-all; }
 
     /* =========================================================
        3. 퀴즈 진행 화면 스타일
        ========================================================= */
-    .quiz-header { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-bottom: 28px; 
-    }
+    .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .badge { font-size: 13px; font-weight: 600; color: var(--text-sub); background: rgba(0, 0, 0, 0.05); padding: 6px 14px; border-radius: 20px; }
+    .progress-bar-bg { width: 90px; height: 6px; background: rgba(0, 0, 0, 0.06); border-radius: 10px; overflow: hidden; }
+    .progress-bar-fill { width: 0%; height: 100%; background: var(--apple-blue); transition: width 0.4s ease; }
 
-    .badge { 
-      font-size: 13px; 
-      font-weight: 600; 
-      color: var(--text-sub); 
-      background: rgba(0, 0, 0, 0.05); 
-      padding: 6px 14px; 
-      border-radius: 20px; 
-    }
-
-    .progress-bar-bg { 
-      width: 90px; 
-      height: 6px; 
-      background: rgba(0, 0, 0, 0.06); 
-      border-radius: 10px; 
-      overflow: hidden; 
-    }
-    .progress-bar-fill { 
-      width: 0%; 
-      height: 100%; 
-      background: var(--apple-blue); 
-      transition: width 0.4s ease; 
-    }
-
-    .question-box { 
-      min-height: 140px; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: center; 
-      text-align: center; 
-      margin-bottom: 32px; 
-      gap: 16px; 
-    }
-    .question-image { 
-      width: 90%; 
-      max-height: 180px; 
-      object-fit: contain; 
-      border-radius: 16px; 
-      display: none; 
-    }
-    .question-text { 
-      font-size: 21px; 
-      font-weight: 700; 
-      line-height: 1.45; 
-      word-break: keep-all; 
-    }
+    .question-box { min-height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 32px; gap: 16px; }
+    .question-image { width: 90%; max-height: 180px; object-fit: contain; border-radius: 16px; display: none; }
+    .question-text { font-size: 21px; font-weight: 700; line-height: 1.45; word-break: keep-all; }
 
     /* =========================================================
        4. 버튼 스타일
        ========================================================= */
-    .btn-group { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; 
-      gap: 16px; 
-    }
-
+    .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .btn-ox {
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      border-radius: 24px;
-      padding: 24px 0;
-      font-size: 32px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02), var(--inner-glow);
-      transition: transform 0.15s, box-shadow 0.15s;
+      background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.04); border-radius: 24px; padding: 24px 0;
+      font-size: 32px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02), var(--inner-glow); transition: transform 0.15s, box-shadow 0.15s;
     }
-    .btn-ox:active { 
-      transform: translateY(2px) scale(0.98); 
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), var(--inner-glow); 
-    }
+    .btn-ox:active { transform: translateY(2px) scale(0.98); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), var(--inner-glow); }
     .btn-o { color: var(--accent-o); }
     .btn-x { color: var(--accent-x); }
     
     .btn-primary {
-      background: var(--apple-blue);
-      color: #ffffff;
-      border: none;
-      padding: 16px 36px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 980px; 
-      cursor: pointer;
-      width: 100%;
-      box-shadow: 0 6px 16px rgba(0, 113, 227, 0.25);
-      transition: transform 0.15s;
+      background: var(--apple-blue); color: #ffffff; border: none; padding: 16px 36px; font-size: 16px; font-weight: 600;
+      border-radius: 980px; cursor: pointer; width: 100%; box-shadow: 0 6px 16px rgba(0, 113, 227, 0.25); transition: transform 0.15s;
     }
     .btn-primary:active { transform: scale(0.97); }
 
@@ -224,97 +99,77 @@
        5. 정답/오답 해설 팝업 레이어
        ========================================================= */
     .feedback-layer {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 32px 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      text-align: center;
-      z-index: 20;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s; text-align: center; z-index: 20;
     }
-    .feedback-layer.active { 
-      opacity: 1; 
-      pointer-events: auto; 
-    }
-    .feedback-status { 
-      font-size: 24px; 
-      font-weight: 800; 
-      margin-bottom: 12px; 
-    }
-    .feedback-desc { 
-      font-size: 14px; 
-      line-height: 1.6; 
-      color: #424245; 
-      margin-bottom: 24px; 
-      word-break: keep-all; 
-      white-space: pre-line;                 
-      text-align: left;                      
-      max-height: 280px;                     
-      overflow-y: auto;                      
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.02);       
-      border-radius: 14px;
-      width: 100%;
-    }
+    .feedback-layer.active { opacity: 1; pointer-events: auto; }
+    .feedback-status { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+    .feedback-desc { font-size: 14px; line-height: 1.6; color: #424245; margin-bottom: 24px; word-break: keep-all; white-space: pre-line; text-align: left; max-height: 280px; overflow-y: auto; padding: 12px; background: rgba(0, 0, 0, 0.02); border-radius: 14px; width: 100%; }
 
     /* =========================================================
        6. 결과 화면 & 정보 입력 폼
        ========================================================= */
-    #resultScreen { 
-      text-align: center; 
-      padding: 10px 0; 
+    #resultScreen { text-align: center; padding: 10px 0; }
+    
+    /* 🔥 [수정됨] 상단 이미지 적용 */
+    .result-top-img {
+      width: 40%; max-height: 120px; object-fit: contain; border-radius: 12px; margin: 0 auto 20px; display: block;
     }
-    .result-score { 
-      font-size: 52px; 
-      font-weight: 800; 
-      letter-spacing: -0.04em; 
-      margin-bottom: 6px; 
-      color: var(--text-main); 
+
+    /* 🔥 [수정됨] 점수 스타일 변경 (배지 형태) */
+    .result-score-badge {
+      display: inline-block; background: rgba(0, 0, 0, 0.05); color: var(--text-main); font-size: 16px; font-weight: 700;
+      padding: 8px 18px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.5px;
     }
-    .form-container { 
-      margin-top: 24px; 
-      text-align: left; 
-      background: rgba(0, 0, 0, 0.02); 
-      padding: 20px; 
-      border-radius: 20px; 
+    
+    /* 🔥 [수정됨] 울림을 주는 문구 */
+    .result-quote {
+      font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--text-main); margin-bottom: 8px; word-break: keep-all; padding: 0 10px;
     }
+
+    .form-container { margin-top: 24px; text-align: left; background: rgba(0, 0, 0, 0.02); padding: 20px; border-radius: 20px; }
     .form-group { margin-bottom: 14px; }
-    .form-label { 
-      display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-sub); 
-    }
+    .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-sub); }
     
-    /* 텍스트 입력창 공통 디자인 */
-    .form-input {
-      width: 100%; padding: 13px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 12px;
-      font-size: 15px; font-family: inherit; background: #ffffff; transition: all 0.2s;
-    }
+    .form-input { width: 100%; padding: 13px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 12px; font-size: 15px; font-family: inherit; background: #ffffff; transition: all 0.2s; }
     .form-input:focus { outline: none; border-color: var(--apple-blue); box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1); }
-    
-    /* 긴 소감을 적는 칸(textarea)을 위한 추가 디자인 */
-    textarea.form-input {
-      resize: vertical;
-      min-height: 80px;
-      line-height: 1.5;
-    }
+    textarea.form-input { resize: vertical; min-height: 80px; line-height: 1.5; }
     
     .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; margin-bottom: 20px; }
     .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--apple-blue); margin-top: 2px; cursor: pointer; }
     .checkbox-label { font-size: 12px; color: var(--text-sub); line-height: 1.5; cursor: pointer; }
 
-    /* 전송 로딩 스피너 */
-    .loader {
-      display: none; margin: 0 auto; width: 28px; height: 28px; border: 3px solid rgba(0, 0, 0, 0.1);
-      border-top-color: var(--apple-blue); border-radius: 50%; animation: spin 1s linear infinite;
-    }
+    .loader { display: none; margin: 0 auto; width: 28px; height: 28px; border: 3px solid rgba(0, 0, 0, 0.1); border-top-color: var(--apple-blue); border-radius: 50%; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* =========================================================
+       7. 제출 완료 텍스트 및 모달(팝업) 스타일
+       ========================================================= */
+    #submitSuccess { display: none; margin-top: 28px; text-align: center; }
+    .success-title { font-weight: 800; color: var(--accent-o); font-size: 20px; margin-bottom: 12px; }
+    .success-desc { font-size: 15px; line-height: 1.6; color: var(--text-main); margin-bottom: 24px; word-break: keep-all; }
+    
+    /* 🔥 [수정됨] 상품 글자 링크 스타일 */
+    .item-link { color: var(--apple-blue); font-weight: 700; text-decoration: underline; cursor: pointer; padding: 2px 4px; border-radius: 4px; transition: background 0.2s; }
+    .item-link:hover { background: rgba(0, 113, 227, 0.1); }
+    .success-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 32px; }
+    
+    .btn-close { background: #e5e5ea; color: var(--text-main); border: none; padding: 14px 36px; font-size: 15px; font-weight: 600; border-radius: 980px; cursor: pointer; width: 100%; transition: transform 0.15s; }
+    .btn-close:active { transform: scale(0.97); }
+
+    /* 이미지 팝업(모달) 바탕 */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+      display: flex; justify-content: center; align-items: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    /* 이미지 팝업 박스 */
+    .modal-content {
+      background: #fff; padding: 20px; border-radius: 24px; width: 85%; max-width: 320px; text-align: center;
+      transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .modal-overlay.active .modal-content { transform: scale(1); }
+    .modal-img { width: 100%; border-radius: 12px; margin-bottom: 16px; object-fit: contain; }
   </style>
 </head>
 <body>
@@ -322,141 +177,129 @@
   <div class="container">
     <div class="card">
 
-      <!-- =========================================================
-           1. 시작 화면 영역
-           ========================================================= -->
+      <!-- 1. 시작 화면 -->
       <div id="startScreen">
-        
-        <!-- 🔥 [핵심!] 복잡한 주소 대신 main.png 파일 이름만 적어주면 됩니다. -->
-        <img 
-          class="start-main-img" 
-          src="메인01.png" 
-          alt="고립은둔청년인식개선 메인 포스터"
-          onerror="this.style.display='none'" 
-        />
-
+        <img class="start-main-img" src="main.png" alt="메인 포스터" onerror="this.style.display='none'" />
         <h1 class="start-title">고립·은둔청년<br>인식개선 퀴즈 & 이벤트</h1>
         <p class="start-desc">문제를 읽어보고 답지를 확인해보세요!<br>퀴즈 후 이벤트에 응모하면 선물을 드립니다.</p>
         <button class="btn-primary" onclick="startQuiz()">시작하기</button>
       </div>
 
-      <!-- =========================================================
-           2. 퀴즈 진행 화면 영역
-           ========================================================= -->
+      <!-- 2. 퀴즈 화면 -->
       <div id="quizScreen">
-        
         <div class="top-nav">
           <button class="btn-back" onclick="goBack()" title="이전 단계로">👈</button>
         </div>
-
         <div class="quiz-header">
           <div class="badge" id="stepCounter">Question 1 of 4</div>
           <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
         </div>
-
         <div class="question-box">
           <img id="questionImage" class="question-image" src="" alt="퀴즈 이미지" />
           <h2 class="question-text" id="questionText">문제를 불러오는 중입니다...</h2>
         </div>
-
         <div class="btn-group">
           <button class="btn-ox btn-o" onclick="submitAnswer(true)">O</button>
           <button class="btn-ox btn-x" onclick="submitAnswer(false)">X</button>
         </div>
       </div>
 
-      <!-- =========================================================
-           3. 결과 및 상품 응모 화면 영역
-           ========================================================= -->
+      <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
         
-        <div class="top-nav">
-          <button class="btn-back" onclick="goBack()" title="이전 단계로">👈</button>
-        </div>
-
-        <div class="result-score" id="scoreText">0 / 4</div>
-        <p class="feedback-desc" id="scoreMessage" style="text-align: center; margin-bottom: 16px; background: none; padding: 0;">수고하셨습니다!</p>
+        <!-- 🔥 [수정됨] 상단 이미지 main02.png 노출 -->
+        <img class="result-top-img" src="메인02.png" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
+        
+        <!-- 🔥 [수정됨] 점수를 작게 배지 형태로 -->
+        <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
+        
+        <!-- 🔥 [수정됨] 울림을 주는 문구 (A안 적용) -->
+        <p class="result-quote">"당신의 작은 관심이 누군가에게는<br>세상으로 다시 건너오는 다리가 됩니다."</p>
+        <p class="feedback-desc" id="scoreMessage" style="text-align: center; margin-bottom: 24px; background: none; padding: 0;">수고하셨습니다!</p>
         
         <div class="form-container" id="rewardForm">
           <div class="form-group">
             <label class="form-label">이름</label>
             <input type="text" id="userName" class="form-input" placeholder="홍길동" required>
           </div>
-          
           <div class="form-group">
             <label class="form-label">생년월일 (나이 확인용)</label>
             <input type="date" id="userBirth" class="form-input" required>
           </div>
-          
           <div class="form-group">
             <label class="form-label">전화번호</label>
             <input type="tel" id="userPhone" class="form-input" placeholder="010-0000-0000" required>
           </div>
-
           <div class="form-group">
             <label class="form-label">간단한 소감</label>
             <textarea id="userReview" class="form-input" placeholder="퀴즈를 풀어보니 어떠셨나요?" required></textarea>
           </div>
-          
           <div class="checkbox-group">
             <input type="checkbox" id="userConsent" required>
             <label class="checkbox-label" for="userConsent">
               이벤트 경품 지급을 위해 이름, 생년월일, 전화번호를 수집 및 이용하는 것에 동의합니다. (이벤트 종료 후 파기됩니다.)
             </label>
           </div>
-          
           <button class="btn-primary" id="submitBtn" onclick="submitToSheet()">이벤트 응모하기</button>
           <div class="loader" id="submitLoader"></div>
         </div>
 
-        <div id="submitSuccess" style="display: none; margin-top: 28px; font-weight: 700; color: var(--accent-o); font-size: 18px;">
-          🎉 이벤트 응모가 완료되었습니다!
+        <!-- 🔥 [수정됨] 제출 완료 후 메시지 및 창 닫기 -->
+        <div id="submitSuccess">
+          <div class="success-title">🎉 이벤트 응모가 완료되었습니다!</div>
+          <div class="success-desc">기간 내에 청춘스럽에 방문하여<br><span class="item-link" onclick="openModal()">🎁 상품</span>을 수령해주세요!</div>
+          <div class="success-sub">(※ 상품은 선착순 수령으로 소진 시, 이벤트가 종료됩니다.)</div>
+          
+          <button class="btn-close" onclick="closeWindow()">창 닫기</button>
         </div>
       </div>
 
-      <!-- =========================================================
-           4. 정답 / 오답 해설 팝업 레이어
-           ========================================================= -->
+      <!-- 4. 해설 레이어 -->
       <div class="feedback-layer" id="feedbackLayer">
         <div class="feedback-status" id="feedbackTitle">정답입니다</div>
         <div class="feedback-desc" id="feedbackDetail">설명 영역</div>
-        
         <button class="btn-primary" id="nextQuestionBtn" onclick="nextQuestion()">다음 문제</button>
       </div>
 
     </div>
   </div>
 
-  <!-- =========================================================
-       5. 자바스크립트 (동작 로직)
-       ========================================================= -->
+  <!-- 🔥 [수정됨] 상품 이미지 모달 팝업 -->
+  <div class="modal-overlay" id="itemModal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <!-- 팝업에 뜰 상품 이미지 파일명: item01.png -->
+      <img src="item01.jpg" alt="상품 이미지" class="modal-img" onerror="this.style.display='none'" />
+      <button class="btn-primary" onclick="closeModal(event)" style="padding: 12px 24px;">확인</button>
+    </div>
+  </div>
+
+  <!-- 5. 스크립트 -->
   <script>
-    // [구글 시트 연동 URL] 완벽하게 업데이트 완료!
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzI42UEt-TFw_m74itK3vw_JhIZmSwJ4Mkd0bsYkz2w1Rn78_h1YusKPOHcKPWuCQb6JA/exec';
 
     const quizData = [
       {
         question: "Q1. 고립 청년과 은둔 청년은 같은 의미이다.",
         image: null,
-        answer: false, // 정답: X
+        answer: false,
         explanation: "정답: X\n\n• 고립 청년: 사회적 관계망이 취약해 교류가 적은 상태를 의미하며 취업·진학·가족관계 등 여러 이유로 사회적 연결이 끊긴 경우를 포함합니다.\n\n• 은둔 청년: 고립 상태 중에서도 6개월 이상 가정이나 개인공간에 머무르며 학교, 직장, 사회활동에 참여하지 않는 경우를 지칭합니다.\n\n**👉 즉, ‘은둔 청년’은 ‘고립 청년’의 하위 개념으로 모든 은둔 청년은 고립 청년일 수 있지만 모든 고립 청년이 은둔 청년인 것은 아닙니다.**"
       },
       {
         question: "Q2. 고립·은둔 청년은 경제적으로 부모에게 의존하며 살아간다.",
         image: null,
-        answer: false, // 정답: X
+        answer: false,
         explanation: "정답: X\n\n일부는 맞지만, 전체를 일반화하기 어렵습니다.\n보건복지부 조사에 따르면 은둔 청년의 절반 가까이(45%)는 스스로 경제활동을 하거나 시도하고 있습니다.\n\n**👉 부모 의존은 고립의 결과이지 본질적 특징이 아닙니다.**"
       },
       {
         question: "Q3. 고립·은둔 청년 비율은 2022년에 비해 2024년부터 감소하고 있다.",
         image: null,
-        answer: false, // 정답: X
+        answer: false,
         explanation: "정답: X\n\n2024년 청년의 삶 실태조사(국무조정실)에 따르면 거의 집에만 있는 고립·은둔 청년 비율은 2022년 2.4%에서 2024년 5.2%로 두 배 이상 증가했습니다.\n\n(보건복지부에 따르면 한국 청년 중 약 50만 명(5%, 2023년), 일본내각부 조사에 따르면 일본 청년 중 약 146만 명(2%, 2022년))"
       },
       {
         question: "Q4. 고립·은둔 청년은 시간이 지나면 자연스럽게 사회로 복귀한다.",
         image: null,
-        answer: false, // 정답: X
+        answer: false,
         explanation: "정답: X\n\n장기 은둔일수록 스스로 회복하기 어려우며, 적절한 사회적 연결과 지원이 있을 때 회복 가능성이 커집니다.\n\nOECD 연구(2021)에 따르면, 외부 개입 없는 장기 은둔자의 사회 복귀율은 20% 미만이었습니다."
       }
     ];
@@ -468,97 +311,70 @@
       document.getElementById("startScreen").style.display = "none";
       document.getElementById("resultScreen").style.display = "none";
       document.getElementById("quizScreen").style.display = "block";
-      currentIndex = 0; 
-      score = 0; 
-      renderQuestion(); 
+      currentIndex = 0; score = 0; renderQuestion(); 
     }
 
     function goBack() {
       const resultScreen = document.getElementById("resultScreen");
       const quizScreen = document.getElementById("quizScreen");
-      
       if (resultScreen.style.display === "block") {
-        resultScreen.style.display = "none";
-        quizScreen.style.display = "block";
-        currentIndex = quizData.length - 1; 
-        renderQuestion();
-        return;
+        resultScreen.style.display = "none"; quizScreen.style.display = "block";
+        currentIndex = quizData.length - 1; renderQuestion(); return;
       }
-      
       if (quizScreen.style.display === "block") {
         if (currentIndex === 0) {
-          quizScreen.style.display = "none";
-          document.getElementById("startScreen").style.display = "block";
+          quizScreen.style.display = "none"; document.getElementById("startScreen").style.display = "block";
         } else {
-          currentIndex--;
-          renderQuestion();
+          currentIndex--; renderQuestion();
         }
       }
     }
 
     function renderQuestion() {
       const current = quizData[currentIndex];
-      
       document.getElementById("stepCounter").textContent = `Question ${currentIndex + 1} of ${quizData.length}`;
       document.getElementById("progressFill").style.width = `${((currentIndex + 1) / quizData.length) * 100}%`;
       document.getElementById("questionText").textContent = current.question;
-
       const imgElement = document.getElementById("questionImage");
-      if (current.image) {
-        imgElement.src = current.image;
-        imgElement.style.display = "block";
-      } else {
-        imgElement.style.display = "none";
-      }
+      if (current.image) { imgElement.src = current.image; imgElement.style.display = "block"; } 
+      else { imgElement.style.display = "none"; }
     }
 
     function submitAnswer(userChoice) {
       const current = quizData[currentIndex];
       const isCorrect = (userChoice === current.answer);
       const title = document.getElementById("feedbackTitle");
-
       if (isCorrect) { 
-        score++; 
-        title.textContent = "정답입니다! 🎉"; 
-        title.style.color = "var(--accent-o)"; 
+        score++; title.textContent = "정답입니다! 🎉"; title.style.color = "var(--accent-o)"; 
       } else { 
-        title.textContent = "오답입니다 💡"; 
-        title.style.color = "var(--accent-x)"; 
+        title.textContent = "오답입니다 💡"; title.style.color = "var(--accent-x)"; 
       }
-
       let rawText = current.explanation;
       let boldText = rawText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); 
       document.getElementById("feedbackDetail").innerHTML = boldText; 
       
       const nextBtn = document.getElementById("nextQuestionBtn");
-      if (currentIndex === quizData.length - 1) {
-        nextBtn.textContent = "이벤트 응모하러 가기";
-      } else {
-        nextBtn.textContent = "다음 문제";
-      }
-
+      if (currentIndex === quizData.length - 1) { nextBtn.textContent = "결과 확인하기"; } 
+      else { nextBtn.textContent = "다음 문제"; }
       document.getElementById("feedbackLayer").classList.add("active"); 
     }
 
     function nextQuestion() {
       document.getElementById("feedbackLayer").classList.remove("active"); 
       currentIndex++; 
-
-      if (currentIndex < quizData.length) { 
-        renderQuestion(); 
-      } else { 
-        showResult();     
-      }
+      if (currentIndex < quizData.length) { renderQuestion(); } 
+      else { showResult(); }
     }
 
     function showResult() {
       document.getElementById("quizScreen").style.display = "none";
       document.getElementById("resultScreen").style.display = "block";
       
-      document.getElementById("scoreText").textContent = `${score} / ${quizData.length}`;
-      document.getElementById("scoreMessage").textContent = score === quizData.length 
-        ? "모든 문제를 맞히셨습니다! 아래 정보를 입력하고 이벤트에 응모하세요." 
-        : `${quizData.length}문제 중 ${score}문제를 맞히셨습니다. 이벤트에 응모해보세요!`;
+      // 🔥 [수정됨] 점수 텍스트 반영
+      document.getElementById("scoreText").textContent = `맞힌 문제 : ${score} / ${quizData.length}`;
+      
+      // 🔥 [수정됨] 점수 메시지 삭제(대신 폼 컨테이너 유지)
+      document.getElementById("scoreMessage").style.display = "none";
     }
 
     function submitToSheet() {
@@ -568,19 +384,12 @@
       const review = document.getElementById('userReview').value.trim();
       const consent = document.getElementById('userConsent').checked;
 
-      if(!name || !birth || !phone || !review) {
-        alert("모든 항목(소감 포함)을 입력해주세요.");
-        return;
-      }
-      if(!consent) {
-        alert("개인정보 수집 및 이용에 동의하셔야 이벤트 응모가 가능합니다.");
-        return;
-      }
+      if(!name || !birth || !phone || !review) { alert("모든 항목(소감 포함)을 입력해주세요."); return; }
+      if(!consent) { alert("개인정보 수집 및 이용에 동의하셔야 이벤트 응모가 가능합니다."); return; }
 
       const btn = document.getElementById('submitBtn');
       const loader = document.getElementById('submitLoader');
-      btn.style.display = 'none';
-      loader.style.display = 'block';
+      btn.style.display = 'none'; loader.style.display = 'block';
 
       const formData = new FormData();
       formData.append('name', name);
@@ -594,13 +403,33 @@
         .then(response => {
           loader.style.display = 'none';
           document.getElementById('rewardForm').style.display = 'none';       
+          
+          // 🔥 [수정됨] 문구, 점수 숨기고 최종 메시지 노출
+          document.querySelector('.result-top-img').style.display = 'none';
+          document.querySelector('.result-score-badge').style.display = 'none';
+          document.querySelector('.result-quote').style.display = 'none';
           document.getElementById('submitSuccess').style.display = 'block';   
         })
         .catch(error => {
           alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-          btn.style.display = 'block';
-          loader.style.display = 'none';
+          btn.style.display = 'block'; loader.style.display = 'none';
         });
+    }
+
+    // 🔥 [수정됨] 팝업 제어 함수
+    function openModal() { document.getElementById('itemModal').classList.add('active'); }
+    function closeModal(event) {
+      if (event.target.classList.contains('modal-overlay') || event.target.tagName === 'BUTTON') {
+        document.getElementById('itemModal').classList.remove('active');
+      }
+    }
+
+    // 🔥 [수정됨] 창 닫기 버튼 로직
+    function closeWindow() {
+      if (window.confirm("이벤트 응모가 완료되었습니다. 창을 닫으시겠습니까?")) {
+        window.close(); // 모바일 환경에 따라 동작하지 않을 수 있음
+        alert("이용하시는 브라우저에서는 버튼으로 창을 닫을 수 없습니다. 직접 뒤로 가기나 탭 닫기를 눌러주세요.");
+      }
     }
   </script>
 </body>
