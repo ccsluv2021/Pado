@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>고립·은둔청년 인식개선 퀴즈 & 이벤트</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>" />  
+  
+  <!-- 🔥 [추가됨] 링크 공유 시 보이는 썸네일 및 설명 (Open Graph) -->
+  <meta property="og:title" content="고립·은둔청년 인식개선 퀴즈 & 이벤트" />
+  <meta property="og:description" content="여러분의 작은 관심이 누군가에게는 다시 연결되는 다리가 됩니다 🌊" />
+  <meta property="og:image" content="https://ccsluv2021.github.io/Pado/메인02.png" />
+  <meta property="og:type" content="website" />
+
   <style>
     /* =========================================================
        1. 디자인 테마 변수 및 폰트
@@ -176,19 +183,15 @@
        ========================================================= */
     #resultScreen { text-align: center; padding: 10px 0; }
     
-    /* 🔥 [수정됨] 높이를 딱 제한하고 여분의 하늘 공간을 잘라내어 꽉 찬 배너로 만듦 */
     .result-top-img {
       width: calc(100% + 56px);      
       margin: -50px -28px 20px -28px; 
       border-top-left-radius: 32px;  
       border-top-right-radius: 32px; 
-      
-      height: 260px;                  /* 너무 길어지지 않게 고정 높이 지정 */
-      object-fit: cover;              /* 꽉 채우되 넘치는 공간은 과감히 자르기 */
-      object-position: center bottom; /* 섬/바다(아래쪽)를 기준으로 맞추고 위쪽 하늘을 잘라냄 */
-      
+      height: 260px;                  
+      object-fit: cover;              
+      object-position: center bottom; 
       display: block;
-      /* 하단 페이드아웃 효과 */
       -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
       mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
     }
@@ -287,7 +290,8 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
-        <img class="result-top-img" src="메인02.png" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
+        <!-- 🔥 이미지 캐시 방지 꼬리표(?v=2) 추가됨 -->
+        <img class="result-top-img" src="메인02.png?v=2" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
         
