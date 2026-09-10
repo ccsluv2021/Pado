@@ -176,8 +176,15 @@
        ========================================================= */
     #resultScreen { text-align: center; padding: 10px 0; }
     
+    /* 🔥 [수정] B안: 결과 화면 상단 이미지 와이드 배너형으로 변경 */
     .result-top-img {
-      width: 40%; max-height: 120px; object-fit: contain; border-radius: 12px; margin: 0 auto 20px; display: block;
+      width: 85%;                 /* 가로를 시원하게 넓힘 */
+      max-height: 240px;
+      object-fit: cover;          /* 이미지 비율을 유지하면서 예쁘게 채움 */
+      border-radius: 24px;        /* 전체 둥근 디자인과 통일감 */
+      margin: 0 auto 24px;
+      display: block;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* 부드럽고 고급스러운 그림자 */
     }
 
     .result-score-badge {
