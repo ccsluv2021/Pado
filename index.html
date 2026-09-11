@@ -6,7 +6,7 @@
   <title>고립·은둔청년 인식개선 퀴즈 & 이벤트</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>" />  
   
-  <!-- 🔥 [추가됨] 링크 공유 시 보이는 썸네일 및 설명 (Open Graph) -->
+  <!-- 🔥 링크 공유 시 보이는 썸네일 및 설명 (Open Graph) -->
   <meta property="og:title" content="고립·은둔청년 인식개선 퀴즈 & 이벤트" />
   <meta property="og:description" content="여러분의 작은 관심이 누군가에게는 다시 연결되는 다리가 됩니다 🌊" />
   <meta property="og:image" content="https://ccsluv2021.github.io/Pado/메인02.png" />
@@ -198,11 +198,12 @@
 
     .result-score-badge {
       display: inline-block; background: rgba(0, 0, 0, 0.05); color: var(--text-main); font-size: 18px; font-weight: 700;
-      padding: 8px 18px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.5px;
+      padding: 8px 18px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.5px;
     }
     
+    /* 🔥 [수정됨] 감성 문구 폰트 축소 (18px -> 16px) */
     .result-quote {
-      font-size: 18px; font-weight: 600; line-height: 1.5; color: var(--text-main); margin-bottom: 8px; word-break: keep-all; padding: 0 10px;
+      font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--text-main); margin-bottom: 8px; word-break: keep-all; padding: 0 10px;
     }
 
     .form-container { margin-top: 24px; text-align: left; background: rgba(0, 0, 0, 0.02); padding: 20px; border-radius: 20px; }
@@ -290,7 +291,6 @@
 
       <!-- 3. 결과 및 이벤트 폼 화면 -->
       <div id="resultScreen">
-        <!-- 🔥 이미지 캐시 방지 꼬리표(?v=2) 추가됨 -->
         <img class="result-top-img" src="메인02.png?v=2" alt="결과 화면 상단 이미지" onerror="this.style.display='none'" />
         
         <div class="result-score-badge" id="scoreText">맞힌 문제 : 0 / 4</div>
