@@ -120,6 +120,16 @@
 
     .start-title { font-size: 28px; line-height: 1.3; margin-bottom: 16px; word-break: keep-all; }
     
+    /* 🔥 [추가됨] 표지 설명 문구 스타일 (약 10pt 크기 지정) */
+    .start-desc {
+      font-size: 13.5px; 
+      line-height: 1.6; 
+      color: #555; 
+      margin-bottom: 28px; 
+      word-break: keep-all; 
+      font-weight: 500;
+    }
+    
     .info-card {
       display: flex; justify-content: center; gap: 12px; background: rgba(0, 0, 0, 0.03);
       padding: 12px; border-radius: 16px; margin-bottom: 24px;
@@ -201,7 +211,6 @@
       padding: 8px 18px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.5px;
     }
     
-    /* 🔥 [수정됨] 감성 문구 폰트 축소 (18px -> 16px) */
     .result-quote {
       font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--text-main); margin-bottom: 8px; word-break: keep-all; padding: 0 10px;
     }
@@ -261,6 +270,17 @@
         
         <h1 class="start-title">고립·은둔청년<br>인식개선 퀴즈 & 이벤트</h1>
         
+        <!-- 🔥 [추가됨] 표지 소개 문구 추가 -->
+        <p class="start-desc">
+          우리는 저마다 북적이거나 고요한<br>
+          때로는 지도에서조차 찾기 힘든<br>
+          자신만의 섬으로 살아갑니다.<br>
+          고립과 은둔의 시간 속에서도<br>
+          여전히 존재하는 이야기를 발견하고<br>
+          각자의 속도로 다시 흘러갈 수 있도록<br>
+          다리를 놓아보고자 합니다.
+        </p>
+        
         <div class="info-card">
           <div class="info-item"><span class="info-icon">⏱️</span> 1분미만</div>
           <div class="info-item" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding: 0 16px;"><span class="info-icon">📝</span> 4문항</div>
@@ -301,7 +321,7 @@
         <div class="form-container" id="rewardForm">
           <div class="form-group">
             <label class="form-label">이름</label>
-            <input type="text" id="userName" class="form-input" placeholder="김청춘" required>
+            <input type="text" id="userName" class="form-input" placeholder="김청년" required>
           </div>
           <div class="form-group">
             <label class="form-label">생년월일 (나이 확인용)</label>
